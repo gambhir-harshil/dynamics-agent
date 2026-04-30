@@ -664,8 +664,29 @@ class DynamicsNextStepsUpdater {
       const update = updateDatePrefix(currentValue, this.todayLabel);
 
       if (update.status === 'blank') {
-        console.log(`  Blank Next Steps; leaving unchanged.`);
-        this.results.blank.push({ caseId: caseRow.caseId, title: caseRow.title });
+        const blankFill = `${this.todayLabel} - investigation underway`;
+        console.log(`  Blank Next Steps; filling with "${blankFill}"${this.dryRun ? ' (dry run)' : ''}`);
+
+        if (!this.dryRun) {
+          await field.click();
+          await casePage.keyboard.press('Control+A');
+          await casePage.keyboard.type(blankFill);
+          await delay(500);
+
+          const saveButton = casePage.getByRole('button', { name: /^Save$/i }).first();
+          const saveVisible = await saveButton.isVisible().catch(() => false);
+          if (saveVisible) {
+            await saveButton.click();
+          } else {
+            await casePage.keyboard.press('Control+S');
+          }
+          await delay(1500);
+        }
+
+        this.results.updated.push({
+          caseId: caseRow.caseId, title: caseRow.title,
+          before: '', after: blankFill, changed: !this.dryRun
+        });
         return;
       }
 
