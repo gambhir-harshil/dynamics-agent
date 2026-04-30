@@ -1,0 +1,25 @@
+{
+  "name": "daily-web-agent",
+  "version": "1.0.0",
+  "description": "Automated agent for daily web tasks",
+  "main": "agent.js",
+  "scripts": {
+    "setup": "npx playwright install chromium",
+    "start": "node agent.js",
+    "schedule": "node scheduler.js",
+    "update-next-steps": "node dynamics-next-steps.js",
+    "update-next-steps:dry-run": "node dynamics-next-steps.js --dry-run",
+    "diagnose-next-steps-ribbon": "node dynamics-next-steps.js --diagnose-ribbon",
+    "diagnose-next-steps-click": "node dynamics-next-steps.js --diagnose-click",
+    "diagnose-next-steps-case": "node dynamics-next-steps.js --diagnose-case"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "node-cron": "^3.0.3",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "keywords": ["automation", "web-scraping", "playwright"],
+  "author": "",
+  "license": "ISC"
+}

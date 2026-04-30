@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m scripts.package_skill ../update-next-steps)",
+      "Bash(pip install *)",
+      "PowerShell(python -m pip install pyyaml -q 2>&1)",
+      "Read(//c/Users/hgambhir/AppData/Local/Programs/**)",
+      "Bash(ls /c/Python*)",
+      "Bash(dir \"C:\\\\Users\\\\hgambhir\\\\OneDrive - Adobe\\\\Agent\")",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}
